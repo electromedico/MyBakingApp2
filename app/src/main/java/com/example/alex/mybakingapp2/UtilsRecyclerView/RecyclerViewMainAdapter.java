@@ -1,16 +1,19 @@
 package com.example.alex.mybakingapp2.UtilsRecyclerView;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity;
 import com.example.alex.mybakingapp2.R;
 import com.example.alex.mybakingapp2.RecipeListActivity;
-import com.example.alex.mybakingapp2.WidgetUtils.WidgetConfigurationActivity;
 import com.example.alex.mybakingapp2.model.Recipe;
+
+import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREFS_NAME;
 
 public class RecyclerViewMainAdapter extends RecyclerView.Adapter {
     private Recipe[] recipes;
@@ -30,7 +33,7 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter {
             viewHolder= new ViewHolderRecipesList(view,(RecipeListActivity)context);
         }
         else{
-            viewHolder= new ViewHolderRecipesList(view,(WidgetConfigurationActivity)context);
+            viewHolder= new ViewHolderRecipesList(view,(IngredientsWidget2ConfigureActivity)context);
         }
 
         return viewHolder;

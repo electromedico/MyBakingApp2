@@ -18,6 +18,7 @@ import com.example.alex.mybakingapp2.NetworkUtils.OnTaskCompleted;
 import com.example.alex.mybakingapp2.UtilsRecyclerView.RecipeOnClickListener;
 import com.example.alex.mybakingapp2.UtilsRecyclerView.RecyclerViewMainAdapter;
 import com.example.alex.mybakingapp2.model.Recipe;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 
@@ -26,8 +27,8 @@ import java.util.HashMap;
  */
 public class IngredientsWidget2ConfigureActivity extends Activity implements OnTaskCompleted,RecipeOnClickListener {
 
-    private static final String PREFS_NAME = "com.example.alex.mybakingapp2.IngredientsWidget2";
-    private static final String PREF_PREFIX_KEY = "appwidget_";
+    public static final String PREFS_NAME = "com.example.alex.mybakingapp2.IngredientsWidget2";
+    public static final String PREF_PREFIX_KEY = "appwidget_";
     int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
     private RecyclerViewMainAdapter mainAdapter;
@@ -48,17 +49,7 @@ public class IngredientsWidget2ConfigureActivity extends Activity implements OnT
         prefs.apply();
     }
 
-    // Read the prefix from the SharedPreferences object for this widget.
-    // If there is no preference saved, get the default from a resource
-    static String loadTitlePref(Context context, int appWidgetId) {
-        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
-        String titleValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null);
-        if (titleValue != null) {
-            return titleValue;
-        } else {
-            return context.getString(R.string.appwidget_text);
-        }
-    }
+
 
     static void deleteTitlePref(Context context, int appWidgetId) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
@@ -119,7 +110,9 @@ public class IngredientsWidget2ConfigureActivity extends Activity implements OnT
 
         // When the button is clicked, store the string locally
         String widgetText = key;
-        saveTitlePref(context, mAppWidgetId, widgetText);
+        Gson gson = new Gson();
+        String json = gson.toJson(recipeHashMap.get(key));
+        saveTitlePref(context, mAppWidgetId, json);
 
         // It is the responsibility of the configuration activity to update the app widget
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);

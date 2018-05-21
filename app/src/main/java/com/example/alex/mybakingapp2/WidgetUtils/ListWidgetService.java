@@ -1,20 +1,28 @@
 package com.example.alex.mybakingapp2.WidgetUtils;
 
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.example.alex.mybakingapp2.R;
 import com.example.alex.mybakingapp2.model.Ingredient;
 import com.example.alex.mybakingapp2.model.Recipe;
+import com.google.gson.Gson;
 
 import java.util.List;
+
+import static com.example.alex.mybakingapp2.IngredientsWidget2.WIDGET_ID_KEY;
+import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREFS_NAME;
+import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREF_PREFIX_KEY;
 
 public class ListWidgetService extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        return new ListRemoteViewsFactory(this.getApplicationContext());
+        return new ListRemoteViewsFactory(this.getApplicationContext(),intent);
     }
 
 }
@@ -23,9 +31,15 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     Context context;
     List<Ingredient> ingredients;
+    private int mAppWidgetId;
 
-    public ListRemoteViewsFactory(Context context) {
+
+    public ListRemoteViewsFactory(Context context,Intent intent) {
         this.context = context;
+        if (intent.getExtras()!=null){
+            mAppWidgetId= Integer.parseInt(intent.getStringExtra(WIDGET_ID_KEY));
+        }
+
 
     }
 
@@ -37,9 +51,14 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public void onDataSetChanged() {
-        if (context instanceof WidgetConfigurationActivity){
-            WidgetConfigurationActivity activity= (WidgetConfigurationActivity) context;
-        }
+        Log.d("onDataSetChanged","onDataSetChanged");
+        String gsonString = loadTitlePref(context, mAppWidgetId);
+        Gson gson = new Gson();
+        Recipe recipe = gson.fromJson(gsonString, Recipe.class);
+        ingredients=recipe.getIngredients();
+
+
+
     }
 
     @Override
@@ -85,8 +104,16 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         return true;
     }
 
-    public void setData(Recipe r){
-        ingredients = r.getIngredients();
+    // Read the prefix from the SharedPreferences object for this widget.
+    // If there is no preference saved, get the default from a resource
+    static String loadTitlePref(Context context, int appWidgetId) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
+        String titleValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null);
+        if (titleValue != null) {
+            return titleValue;
+        } else {
+            return context.getString(R.string.appwidget_text);
+        }
     }
 
 }

@@ -31,21 +31,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.alex.mybakingapp2.RecipeListActivity" />
         </activity>
-        <activity android:name=".WidgetUtils.WidgetConfigurationActivity">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
-
-        <receiver android:name=".IngredientsWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/ingredients_widget_info" />
-        </receiver>
 
         <service
             android:name=".WidgetUtils.ListWidgetService"
