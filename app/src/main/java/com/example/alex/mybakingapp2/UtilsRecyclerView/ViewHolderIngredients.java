@@ -1,0 +1,39 @@
+package com.example.alex.mybakingapp2.UtilsRecyclerView;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.alex.mybakingapp2.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class ViewHolderIngredients extends RecyclerView.ViewHolder {
+    @BindView(R.id.ingredient_tv)
+    TextView ingredientTv;
+    @BindView(R.id.quantity_tv)
+    TextView quantityTv;
+
+    public ViewHolderIngredients(View itemView) {
+
+        super(itemView);
+        ButterKnife.bind(this,itemView);
+    }
+
+    public TextView getIngredientTv() {
+        return ingredientTv;
+    }
+
+    public void setIngredientTv(TextView ingredientTv) {
+        this.ingredientTv = ingredientTv;
+    }
+
+    public TextView getQuantityTv() {
+        return quantityTv;
+    }
+
+    public void setQuantityTv(TextView quantityTv) {
+        this.quantityTv = quantityTv;
+    }
+}

@@ -1,0 +1,50 @@
+
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#09C"
+    android:padding="@dimen/widget_margin">
+
+    <ListView
+        android:id="@+id/widget_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/widget_ingredients_LL"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/dot"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                />
+
+            <TextView
+                android:id="@+id/ingredient_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="TextView"
+                />
+
+            <TextView
+                android:id="@+id/quantity_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="TextView"/>
+
+        </LinearLayout>
+    </ListView>
+
+</FrameLayout>
+
