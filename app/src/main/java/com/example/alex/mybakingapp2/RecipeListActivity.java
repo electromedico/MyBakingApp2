@@ -1,11 +1,14 @@
 package com.example.alex.mybakingapp2;
 
-import android.appwidget.AppWidgetManager;
-import android.content.Context;
+
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,13 +16,12 @@ import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.widget.LinearLayout;
 
+import com.example.alex.mybakingapp2.IdlingResource.SimpleIdlingResource;
 import com.example.alex.mybakingapp2.NetworkUtils.GetRecepiesController;
 import com.example.alex.mybakingapp2.NetworkUtils.OnTaskCompleted;
 import com.example.alex.mybakingapp2.UtilsRecyclerView.RecipeOnClickListener;
 import com.example.alex.mybakingapp2.UtilsRecyclerView.RecyclerViewMainAdapter;
-import com.example.alex.mybakingapp2.model.Ingredient;
 import com.example.alex.mybakingapp2.model.Recipe;
 
 import java.io.Serializable;
@@ -45,6 +47,9 @@ public class RecipeListActivity extends AppCompatActivity implements OnTaskCompl
     private RecipeListActivity mParentActivity;
     private HashMap<String,Recipe> recipeHashMap;
     private RecyclerView recyclerView;
+
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +86,8 @@ public class RecipeListActivity extends AppCompatActivity implements OnTaskCompl
 
         GetRecepiesController getRecepiesController = new GetRecepiesController(this);
         getRecepiesController.start();
+
+        getIdlingResource();
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -142,6 +149,16 @@ public class RecipeListActivity extends AppCompatActivity implements OnTaskCompl
 
             this.startActivity(intent);
         }
+    }
+
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource(){
+
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
     }
 
 }

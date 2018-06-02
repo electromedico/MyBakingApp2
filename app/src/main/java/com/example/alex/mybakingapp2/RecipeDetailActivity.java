@@ -11,6 +11,10 @@ import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
 import com.example.alex.mybakingapp2.model.Recipe;
+import com.google.gson.Gson;
+
+import static com.example.alex.mybakingapp2.IngredientsWidget2.WIDGET_ID_KEY;
+import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREF_PREFIX_KEY;
 
 /**
  * An activity representing a single Recipe detail screen. This
@@ -19,7 +23,7 @@ import com.example.alex.mybakingapp2.model.Recipe;
  * in a {@link RecipeListActivity}.
  */
 public class RecipeDetailActivity extends AppCompatActivity {
-
+    Recipe recipe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,14 +31,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        Bundle bundle =getIntent().getExtras();
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -53,7 +50,15 @@ public class RecipeDetailActivity extends AppCompatActivity {
         //
         if (savedInstanceState == null) {
 
-            Recipe recipe = (Recipe) getIntent().getSerializableExtra(RecipeDetailFragment.ARG_ITEM_ID);
+            if (bundle!= null){
+                if (bundle.containsKey(WIDGET_ID_KEY)){
+                    String widgetId=bundle.getString(WIDGET_ID_KEY);
+                    recipe = (Recipe) bundle.getSerializable(PREF_PREFIX_KEY+widgetId);
+                }
+                else{
+                    recipe = (Recipe) getIntent().getSerializableExtra(RecipeDetailFragment.ARG_ITEM_ID);
+                }
+            }
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();

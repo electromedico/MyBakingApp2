@@ -1,5 +1,6 @@
 package com.example.alex.mybakingapp2;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -7,7 +8,11 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.example.alex.mybakingapp2.WidgetUtils.ListWidgetService;
+import com.example.alex.mybakingapp2.model.Recipe;
+import com.google.gson.Gson;
 
+import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREF_PREFIX_KEY;
+import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.loadTitlePref;
 
 
 /**
@@ -20,12 +25,25 @@ public class IngredientsWidget2 extends AppWidgetProvider {
                                 int appWidgetId) {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredients_widget);
+        //we get the objet
+        String recepiJSON = IngredientsWidget2ConfigureActivity.loadTitlePref(context, appWidgetId);
+        Gson gson = new Gson();
+
+        if (recepiJSON!=null) {
+            Recipe recipe = gson.fromJson(recepiJSON,Recipe.class);
+            views.setTextViewText(R.id.widget_title,recipe.getName());
+
+        }
 
         //Set the ListWidgetService to act as the adapter for the listview
         Intent intent = new Intent(context, ListWidgetService.class);
         intent.putExtra(WIDGET_ID_KEY,String.valueOf(appWidgetId));
         views.setRemoteAdapter(R.id.widget_list_view,intent);
 
+        //Set the recipeactivity to launch when clicked;
+        Intent appIntent = new Intent(context, RecipeDetailActivity.class);
+        PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setPendingIntentTemplate(R.id.widget_list_view, appPendingIntent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId,R.id.widget_list_view);

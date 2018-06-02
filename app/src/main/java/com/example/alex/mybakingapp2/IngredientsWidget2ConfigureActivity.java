@@ -49,6 +49,15 @@ public class IngredientsWidget2ConfigureActivity extends Activity implements OnT
         prefs.apply();
     }
 
+    public static String loadTitlePref(Context context, int appWidgetId) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
+        String titleValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null);
+        if (titleValue != null) {
+            return titleValue;
+        } else {
+            return null;
+        }
+    }
 
 
     static void deleteTitlePref(Context context, int appWidgetId) {
