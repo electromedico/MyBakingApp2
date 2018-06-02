@@ -1,7 +1,6 @@
 package com.example.alex.mybakingapp2;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,21 +16,8 @@ import android.view.ViewGroup;
 import com.example.alex.mybakingapp2.MediaUtils.CustomOnScrollListener;
 import com.example.alex.mybakingapp2.MediaUtils.RecyclerViewStateListener;
 import com.example.alex.mybakingapp2.UtilsRecyclerView.RecyclerViewDetailAdapter;
-import com.example.alex.mybakingapp2.UtilsRecyclerView.ViewHolderStep;
 import com.example.alex.mybakingapp2.model.Recipe;
-import com.example.alex.mybakingapp2.model.Step;
-import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 
 /**
  * A fragment representing a single Recipe detail screen.
@@ -51,10 +37,6 @@ public class RecipeDetailFragment extends Fragment implements RecyclerViewStateL
      */
     private Recipe mItem;
 
-    /**
-     *
-     * */
-    private SimpleExoPlayer mExoPlayer;
     private RecyclerViewDetailAdapter mDetailAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -84,7 +66,7 @@ public class RecipeDetailFragment extends Fragment implements RecyclerViewStateL
             mLayoutManager = new LinearLayoutManager(activity);
             mDetailAdapter = new RecyclerViewDetailAdapter(activity);
             customOnScrollListener = new CustomOnScrollListener(this,mLayoutManager);
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getName());
             }

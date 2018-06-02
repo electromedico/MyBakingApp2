@@ -41,10 +41,10 @@ import java.util.List;
 
 public class RecyclerViewDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements RecyclerViewStateListener, ExoPlayer.EventListener {
 
-    private List<Object> items = new ArrayList<>();
+    private final List<Object> items = new ArrayList<>();
     private final Context context;
-    private HashMap<String , MediaSource> mediaSourceHashMap;
-    private HashMap<String , SimpleExoPlayer> simpleExoPlayerHashMap;
+    private final HashMap<String , MediaSource> mediaSourceHashMap;
+    private final HashMap<String , SimpleExoPlayer> simpleExoPlayerHashMap;
 
 
     private final int INGREDIENT_CL =0;
@@ -153,7 +153,7 @@ public class RecyclerViewDetailAdapter extends RecyclerView.Adapter<RecyclerView
         //retrieve list of ingredients and add to the items list
         Object[] ingredients = recipe.getIngredients().toArray();
         for (Object ingredient : ingredients){
-            items.add((Ingredient)ingredient);
+            items.add(ingredient);
         }
 
         //Insert Steps Label
@@ -162,7 +162,7 @@ public class RecyclerViewDetailAdapter extends RecyclerView.Adapter<RecyclerView
         //retrieve list of steps and add them to the items list
         Object[] steps = recipe.getSteps().toArray();
         for ( Object step : steps){
-            items.add((Step)step);
+            items.add(step);
         }
 
         notifyDataSetChanged();
@@ -270,27 +270,20 @@ public class RecyclerViewDetailAdapter extends RecyclerView.Adapter<RecyclerView
     private class  ViewHolderLabel extends RecyclerView.ViewHolder{
         private TextView labelTv;
 
-        public ViewHolderLabel(View itemView) {
+        ViewHolderLabel(View itemView) {
             super(itemView);
             labelTv= itemView.findViewById(R.id.label_tv);
         }
 
-        public TextView getLabelTv() {
+        TextView getLabelTv() {
             return labelTv;
         }
 
-        public void setLabelTv(TextView labelTv) {
-            this.labelTv = labelTv;
-        }
     }
 
     @Override
     public long getItemId(int position) {
         return super.getItemId(position);
-    }
-
-    public Object getItem(int position) {
-        return items.get(position);
     }
 
     @Override
@@ -363,7 +356,7 @@ public class RecyclerViewDetailAdapter extends RecyclerView.Adapter<RecyclerView
 
     /**if the viewholder is no longer visible we realease the player
      * */
-    public void releasePlayer(String id){
+    private void releasePlayer(String id){
         SimpleExoPlayer exoPlayer = simpleExoPlayerHashMap.get(id);
         if (exoPlayer!=null ){
             exoPlayer.stop();

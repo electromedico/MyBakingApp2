@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.HashMap;
 
-public class WidgetListViewAdapter extends ArrayAdapter {
+class WidgetListViewAdapter extends ArrayAdapter {
 
     private final Context context;
     private final String[] values;

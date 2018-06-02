@@ -10,7 +10,7 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ViewHolderVideo extends RecyclerView.ViewHolder{
+class ViewHolderVideo extends RecyclerView.ViewHolder{
     @BindView(R.id.video_step_id_tv)
     TextView videoStepId;
     @BindView(R.id.playerView)
@@ -31,24 +31,12 @@ public class ViewHolderVideo extends RecyclerView.ViewHolder{
         return videoDescription;
     }
 
-    public void setVideoDescription(TextView videoDescription) {
-        this.videoDescription = videoDescription;
-    }
-
     public TextView getVideoStepId() {
         return videoStepId;
     }
 
-    public void setVideoStepId(TextView videoStepId) {
-        this.videoStepId = videoStepId;
-    }
-
     public SimpleExoPlayerView getmPlayerView() {
         return mPlayerView;
-    }
-
-    public void setmPlayerView(SimpleExoPlayerView mPlayerView) {
-        this.mPlayerView = mPlayerView;
     }
 
     public String getUrlString() {

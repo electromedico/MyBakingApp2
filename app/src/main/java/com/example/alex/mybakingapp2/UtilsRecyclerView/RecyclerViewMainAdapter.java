@@ -1,7 +1,6 @@
 package com.example.alex.mybakingapp2.UtilsRecyclerView;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity;
 import com.example.alex.mybakingapp2.R;
 import com.example.alex.mybakingapp2.RecipeListActivity;
 import com.example.alex.mybakingapp2.model.Recipe;
-
-import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREFS_NAME;
 
 public class RecyclerViewMainAdapter extends RecyclerView.Adapter {
     private Recipe[] recipes;

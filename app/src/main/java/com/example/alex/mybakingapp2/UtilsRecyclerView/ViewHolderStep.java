@@ -10,7 +10,7 @@ import com.example.alex.mybakingapp2.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ViewHolderStep extends RecyclerView.ViewHolder {
+class ViewHolderStep extends RecyclerView.ViewHolder {
     @BindView(R.id.step_id_tv)
     TextView stepIdTv;
     @BindView(R.id.step_description_tv)
@@ -31,24 +31,12 @@ public class ViewHolderStep extends RecyclerView.ViewHolder {
         return stepIdTv;
     }
 
-    public void setStepIdTv(TextView stepIdTv) {
-        this.stepIdTv = stepIdTv;
-    }
-
     public TextView getStepTv() {
         return stepTv;
     }
 
-    public void setStepTv(TextView stepTv) {
-        this.stepTv = stepTv;
-    }
-
     public ImageView getImageTv() {
         return imageTv;
-    }
-
-    public void setImageTv(ImageView imageTv) {
-        this.imageTv = imageTv;
     }
 
     public String getImageURL() {

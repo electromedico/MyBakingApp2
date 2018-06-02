@@ -38,7 +38,7 @@ public class Ingredient implements Serializable, Parcelable
     ;
     private final static long serialVersionUID = 771007172843079703L;
 
-    protected Ingredient(Parcel in) {
+    Ingredient(Parcel in) {
         this.quantity = ((float) in.readValue((int.class.getClassLoader())));
         this.measure = ((String) in.readValue((String.class.getClassLoader())));
         this.ingredient = ((String) in.readValue((String.class.getClassLoader())));
@@ -51,24 +51,12 @@ public class Ingredient implements Serializable, Parcelable
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getMeasure() {
         return measure;
     }
 
-    public void setMeasure(String measure) {
-        this.measure = measure;
-    }
-
     public String getIngredient() {
         return ingredient;
-    }
-
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
     }
 
     public void writeToParcel(Parcel dest, int flags) {

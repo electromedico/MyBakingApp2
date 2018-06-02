@@ -11,16 +11,13 @@ import com.example.alex.mybakingapp2.WidgetUtils.ListWidgetService;
 import com.example.alex.mybakingapp2.model.Recipe;
 import com.google.gson.Gson;
 
-import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREF_PREFIX_KEY;
-import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.loadTitlePref;
-
 
 /**
  * Implementation of App Widget functionality.
  * App Widget Configuration implemented in {@link IngredientsWidget2ConfigureActivity IngredientsWidget2ConfigureActivity}
  */
 public class IngredientsWidget2 extends AppWidgetProvider {
-    public static String WIDGET_ID_KEY="widget_id";
+    public static final String WIDGET_ID_KEY="widget_id";
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 

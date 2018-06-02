@@ -1,16 +1,10 @@
 package com.example.alex.mybakingapp2.WidgetUtils;
 
-import android.app.PendingIntent;
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
-import android.widget.TextView;
 
 import com.example.alex.mybakingapp2.R;
 import com.example.alex.mybakingapp2.RecipeDetailActivity;
@@ -22,7 +16,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import static com.example.alex.mybakingapp2.IngredientsWidget2.WIDGET_ID_KEY;
-import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREFS_NAME;
 import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREF_PREFIX_KEY;
 import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.loadTitlePref;
 
@@ -36,10 +29,10 @@ public class ListWidgetService extends RemoteViewsService {
 
 class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    Context context;
-    List<Ingredient> ingredients;
+    private final Context context;
+    private List<Ingredient> ingredients;
     private int mAppWidgetId;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
     private Recipe recipe;
 
 

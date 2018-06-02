@@ -2,17 +2,11 @@ package com.example.alex.mybakingapp2;
 
 
 
-import android.app.Activity;
 import android.app.Instrumentation;
-import android.content.Intent;
-import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.contrib.RecyclerViewActions;
-import android.support.test.espresso.intent.ActivityResultFunction;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v7.widget.RecyclerView;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,7 +20,6 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.Intents.intending;
-import static android.support.test.espresso.intent.matcher.IntentMatchers.hasAction;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtraWithKey;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.isInternal;
@@ -41,7 +34,7 @@ public class RecipeListActivityTest {
     private IdlingResource mIdlingResource;
 
     @Rule
-    public IntentsTestRule<RecipeListActivity> mActivityµRule = new IntentsTestRule<>(RecipeListActivity.class);
+    public final IntentsTestRule<RecipeListActivity> mActivityµRule = new IntentsTestRule<>(RecipeListActivity.class);
 
 
 

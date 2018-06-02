@@ -10,8 +10,6 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.EditText;
 
 import com.example.alex.mybakingapp2.NetworkUtils.GetRecepiesController;
 import com.example.alex.mybakingapp2.NetworkUtils.OnTaskCompleted;
@@ -27,15 +25,13 @@ import java.util.HashMap;
  */
 public class IngredientsWidget2ConfigureActivity extends Activity implements OnTaskCompleted,RecipeOnClickListener {
 
-    public static final String PREFS_NAME = "com.example.alex.mybakingapp2.IngredientsWidget2";
+    private static final String PREFS_NAME = "com.example.alex.mybakingapp2.IngredientsWidget2";
     public static final String PREF_PREFIX_KEY = "appwidget_";
-    int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+    private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
     private RecyclerViewMainAdapter mainAdapter;
     private HashMap<String,Recipe> recipeHashMap;
     private RecyclerView recyclerView;
-    private int intentWidgetId;
-    private Recipe recipe;
 
 
     public IngredientsWidget2ConfigureActivity() {
@@ -43,7 +39,7 @@ public class IngredientsWidget2ConfigureActivity extends Activity implements OnT
     }
 
     // Write the prefix to the SharedPreferences object for this widget
-    static void saveTitlePref(Context context, int appWidgetId, String text) {
+    private static void saveTitlePref(Context context, int appWidgetId, String text) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
         prefs.putString(PREF_PREFIX_KEY + appWidgetId, text);
         prefs.apply();

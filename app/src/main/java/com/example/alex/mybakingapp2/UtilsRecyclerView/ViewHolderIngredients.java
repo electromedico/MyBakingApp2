@@ -9,7 +9,7 @@ import com.example.alex.mybakingapp2.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ViewHolderIngredients extends RecyclerView.ViewHolder {
+class ViewHolderIngredients extends RecyclerView.ViewHolder {
     @BindView(R.id.ingredient_tv)
     TextView ingredientTv;
     @BindView(R.id.quantity_tv)
@@ -25,15 +25,8 @@ public class ViewHolderIngredients extends RecyclerView.ViewHolder {
         return ingredientTv;
     }
 
-    public void setIngredientTv(TextView ingredientTv) {
-        this.ingredientTv = ingredientTv;
-    }
-
     public TextView getQuantityTv() {
         return quantityTv;
     }
 
-    public void setQuantityTv(TextView quantityTv) {
-        this.quantityTv = quantityTv;
-    }
 }

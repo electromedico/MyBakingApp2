@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ViewHolderRecipesList extends RecyclerView.ViewHolder implements View.OnClickListener{
+class ViewHolderRecipesList extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     @BindView(R.id.recipe_name)
     TextView recipeName;
@@ -28,10 +28,6 @@ public class ViewHolderRecipesList extends RecyclerView.ViewHolder implements Vi
 
     public TextView getRecipeName() {
         return recipeName;
-    }
-
-    public void setRecipeName(TextView recipeName) {
-        this.recipeName = recipeName;
     }
 
     @Override

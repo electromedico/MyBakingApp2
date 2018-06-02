@@ -6,7 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface RecipeAPI {
+interface RecipeAPI {
 
     String RECIPES_TAG = "baking.json";
 
