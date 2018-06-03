@@ -4,4 +4,7 @@
     <string name="step_label">Step</string>
 
     <string name="manager_state">Manager State</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_step_list">Recipe</string>
+    <string name="title_step_detail">Step Detail</string>
 </resources>

@@ -7,27 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
-import com.example.alex.mybakingapp2.model.Recipe;
-
-import static com.example.alex.mybakingapp2.IngredientsWidget2.WIDGET_ID_KEY;
-import static com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity.PREF_PREFIX_KEY;
-
 /**
- * An activity representing a single Recipe detail screen. This
+ * An activity representing a single Step detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link RecipeListActivity}.
+ * in a {@link StepListActivity}.
  */
-public class RecipeDetailActivity extends AppCompatActivity {
-    private Recipe recipe;
+public class StepDetailActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_detail);
+        setContentView(R.layout.activity_step_detail);
         Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
-        Bundle bundle =getIntent().getExtras();
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -46,24 +40,16 @@ public class RecipeDetailActivity extends AppCompatActivity {
         //
         if (savedInstanceState == null) {
 
-            if (bundle!= null){
-                if (bundle.containsKey(WIDGET_ID_KEY)){
-                    String widgetId=bundle.getString(WIDGET_ID_KEY);
-                    recipe = (Recipe) bundle.getSerializable(PREF_PREFIX_KEY+widgetId);
-                }
-                else{
-                    recipe = (Recipe) getIntent().getSerializableExtra(RecipeDetailFragment.ARG_ITEM_ID);
-                }
-            }
+
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putSerializable(RecipeDetailFragment.ARG_ITEM_ID,
-                    recipe);
-            RecipeDetailFragment fragment = new RecipeDetailFragment();
+            arguments.putSerializable(StepDetailFragment.ARG_ITEM_ID,
+                    getIntent().getSerializableExtra(StepDetailFragment.ARG_ITEM_ID));
+            StepDetailFragment fragment = new StepDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.recipe_detail_container, fragment)
+                    .add(R.id.step_detail_container, fragment)
                     .commit();
         }
     }
@@ -78,7 +64,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, RecipeListActivity.class));
+            navigateUpTo(new Intent(this, StepListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

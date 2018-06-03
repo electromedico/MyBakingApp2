@@ -1,6 +1,5 @@
 package com.example.alex.mybakingapp2;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -23,49 +22,23 @@ import com.example.alex.mybakingapp2.model.Recipe;
 import java.io.Serializable;
 import java.util.HashMap;
 
+public class MainActivity extends AppCompatActivity implements OnTaskCompleted,RecipeOnClickListener {
 
-/**
- * An activity representing a list of Recipes. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link RecipeDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
-public class RecipeListActivity extends AppCompatActivity implements OnTaskCompleted,RecipeOnClickListener {
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
-    private boolean mTwoPane;
     private RecyclerViewMainAdapter mainAdapter;
-    private RecipeListActivity mParentActivity;
     private HashMap<String,Recipe> recipeHashMap;
     private RecyclerView recyclerView;
 
     @Nullable
     private SimpleIdlingResource mIdlingResource;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_list);
-
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
-
-        mParentActivity=this;
-
-
-        if (findViewById(R.id.recipe_detail_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
-            mTwoPane = true;
-        }
 
         recyclerView = findViewById(R.id.recipe_list);
         assert recyclerView != null;
@@ -75,13 +48,13 @@ public class RecipeListActivity extends AppCompatActivity implements OnTaskCompl
         getRecepiesController.start();
 
         getIdlingResource();
+
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         mainAdapter = new RecyclerViewMainAdapter(this);
         recyclerView.setAdapter(mainAdapter);
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -95,7 +68,7 @@ public class RecipeListActivity extends AppCompatActivity implements OnTaskCompl
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState != null) {
 
-           //Restore state of the RecyclerView
+            //Restore state of the RecyclerView
             String keyState = getString(R.string.manager_state);
             if(savedInstanceState.containsKey(keyState)){
 
@@ -122,20 +95,12 @@ public class RecipeListActivity extends AppCompatActivity implements OnTaskCompl
     @Override
     public void onListItemClick(String key) {
         Recipe recipe = recipeHashMap.get(key);
-        if (mTwoPane) {
-            Bundle arguments = new Bundle();
-            arguments.putSerializable(RecipeDetailFragment.ARG_ITEM_ID,recipe);
-            RecipeDetailFragment fragment = new RecipeDetailFragment();
-            fragment.setArguments(arguments);
-            mParentActivity.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.recipe_detail_container, fragment)
-                    .commit();
-        } else {
-            Intent intent = new Intent(this, RecipeDetailActivity.class);
-            intent.putExtra(RecipeDetailFragment.ARG_ITEM_ID, (Serializable) recipe);
 
-            this.startActivity(intent);
-        }
+        Intent intent = new Intent(this, StepListActivity.class);
+        intent.putExtra(StepListActivity.ARG_ITEM_ID, (Serializable) recipe);
+
+        this.startActivity(intent);
+
     }
 
     @VisibleForTesting
@@ -147,5 +112,6 @@ public class RecipeListActivity extends AppCompatActivity implements OnTaskCompl
         }
         return mIdlingResource;
     }
+
 
 }

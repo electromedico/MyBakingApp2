@@ -38,7 +38,7 @@ public class IngredientsWidget2 extends AppWidgetProvider {
         views.setRemoteAdapter(R.id.widget_list_view,intent);
 
         //Set the recipeactivity to launch when clicked;
-        Intent appIntent = new Intent(context, RecipeDetailActivity.class);
+        Intent appIntent = new Intent(context, StepListActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_list_view, appPendingIntent);
 

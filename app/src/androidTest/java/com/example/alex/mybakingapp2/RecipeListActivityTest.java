@@ -34,13 +34,13 @@ public class RecipeListActivityTest {
     private IdlingResource mIdlingResource;
 
     @Rule
-    public final IntentsTestRule<RecipeListActivity> mActivityµRule = new IntentsTestRule<>(RecipeListActivity.class);
+    public final IntentsTestRule<MainActivity> mActivityRule = new IntentsTestRule<>(MainActivity.class);
 
 
 
     @Before
     public void registerIdlingResource() {
-        mIdlingResource = mActivityµRule.getActivity().getIdlingResource();
+        mIdlingResource = mActivityRule.getActivity().getIdlingResource();
         // To prove that the test fails, omit this call:
         IdlingRegistry.getInstance().register(mIdlingResource);
 
@@ -57,8 +57,8 @@ public class RecipeListActivityTest {
     onView(withId(R.id.recipe_list)).perform(actionOnItemAtPosition(0,click()));
 
     intended(allOf(
-            hasComponent(RecipeDetailActivity.class.getName()),
-        hasExtraWithKey(RecipeDetailFragment.ARG_ITEM_ID)
+            hasComponent(StepListActivity.class.getName()),
+        hasExtraWithKey(StepListActivity.ARG_ITEM_ID)
     ));
 
     }

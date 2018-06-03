@@ -52,9 +52,9 @@ public class Recipe implements Serializable, Parcelable
     protected Recipe(Parcel in) {
         this.id = ((int) in.readValue((int.class.getClassLoader())));
         this.name = ((String) in.readValue((String.class.getClassLoader())));
-        ingredients = new ArrayList<Ingredient>();
+        ingredients = new ArrayList<>();
         in.readList(this.ingredients, (com.example.alex.mybakingapp2.model.Ingredient.class.getClassLoader()));
-        steps = new ArrayList<Step>();
+        steps = new ArrayList<>();
         in.readList(this.steps, (com.example.alex.mybakingapp2.model.Step.class.getClassLoader()));
         this.servings = ((int) in.readValue((int.class.getClassLoader())));
         this.image = ((String) in.readValue((String.class.getClassLoader())));

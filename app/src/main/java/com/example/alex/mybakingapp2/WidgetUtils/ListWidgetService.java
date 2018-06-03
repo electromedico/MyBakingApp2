@@ -7,7 +7,7 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.example.alex.mybakingapp2.R;
-import com.example.alex.mybakingapp2.RecipeDetailActivity;
+import com.example.alex.mybakingapp2.StepListActivity;
 import com.example.alex.mybakingapp2.model.Ingredient;
 import com.example.alex.mybakingapp2.model.Recipe;
 import com.google.gson.Gson;
@@ -84,7 +84,7 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
             views.setTextViewText(R.id.ingredient_widget_tv,ingredient.getIngredient());
 
 
-            Intent appIntent = new Intent(context, RecipeDetailActivity.class);
+            Intent appIntent = new Intent(context, StepListActivity.class);
             appIntent.putExtra(WIDGET_ID_KEY,String.valueOf(mAppWidgetId));
             appIntent.putExtra(PREF_PREFIX_KEY+mAppWidgetId,
                     (Serializable)recipe);

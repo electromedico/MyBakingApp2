@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alex.mybakingapp2.IngredientsWidget2ConfigureActivity;
+import com.example.alex.mybakingapp2.MainActivity;
 import com.example.alex.mybakingapp2.R;
-import com.example.alex.mybakingapp2.RecipeListActivity;
 import com.example.alex.mybakingapp2.model.Recipe;
 
 public class RecyclerViewMainAdapter extends RecyclerView.Adapter {
@@ -26,8 +26,8 @@ public class RecyclerViewMainAdapter extends RecyclerView.Adapter {
         RecyclerView.ViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.recipe_list_content,parent,false);
-        if(context instanceof RecipeListActivity){
-            viewHolder= new ViewHolderRecipesList(view,(RecipeListActivity)context);
+        if(context instanceof MainActivity){
+            viewHolder= new ViewHolderRecipesList(view,(MainActivity)context);
         }
         else{
             viewHolder= new ViewHolderRecipesList(view,(IngredientsWidget2ConfigureActivity)context);
