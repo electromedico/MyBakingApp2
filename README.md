@@ -26,10 +26,8 @@ App Implementation
 ![My image](img/Widget.jpeg)
 
 Libraries used:
+
 Retrofit
-Exoplayer
-Picasso
-ButterKnife
-Gson
-Espresso
+
+Exoplayer, Picasso, ButterKnife, Gson, Espresso
 
